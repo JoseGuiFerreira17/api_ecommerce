@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'django_filters',
     'accounts',
+    'product',
 ]
 
 REST_FRAMEWORK = {
