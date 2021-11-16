@@ -1,7 +1,7 @@
 **Documentação da API**
 ----
 
-Através do software Insomnia, o arquivo `test_ecommerce` pode ser importado e o ambiente
+Através do software Insomnia, o arquivo `insomnia_ecommerce` pode ser importado e o ambiente
 para testes estará configurado, de forma que todas as rotas da API estarão disponíveis. <br />
 
 
