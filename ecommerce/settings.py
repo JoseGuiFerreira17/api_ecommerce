@@ -3,7 +3,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-b404d#ifgn)wct+9(&78p^!kqghi6*pe2zyugkkxz=s)xi%9l1'
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
@@ -70,8 +70,8 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config("SQL_ENGINE"),
+        'NAME': BASE_DIR / config("SQL_NAME_DATABASE"),
     }
 }
 
@@ -99,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
