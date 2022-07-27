@@ -128,7 +128,7 @@ class ProductModelTest(TestCase):
         self.assertEquals(self.product.description, 'Lorem ipsum')
 
     def test_value_value(self):
-        self.assertEquals(self.product.value, 15.5)
+        self.assertEquals(self.product.value, 25.66)
 
     def test_created(self):
         self.assertIsInstance(self.product.created, datetime)
