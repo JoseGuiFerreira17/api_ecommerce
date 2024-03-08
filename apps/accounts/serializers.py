@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from accounts.models import User
 
-MISMATCH = 'As senhas não correspondem'
+MISMATCH = "As senhas não correspondem"
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,34 +14,32 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        ordering = ['created']
-        fields = [
-            'id', 'username', 'password1', 'password2'
-        ]
-        extra_kwargs = {'id': {'read_only': True}}
+        ordering = ["created"]
+        fields = ["id", "username", "password1", "password2"]
+        extra_kwargs = {"id": {"read_only": True}}
 
     def validate(self, data):
-        password = data.get('password1')
-        password2 = data.get('password2')
+        password = data.get("password1")
+        password2 = data.get("password2")
 
         if password == password2:
-            user = User(username=data.get('username'))
+            user = User(username=data.get("username"))
             errors = dict()
             try:
                 validators.validate_password(password=password, user=user)
             except exceptions.ValidationError as e:
-                errors['password1'] = list(e.messages)
+                errors["password1"] = list(e.messages)
                 if errors:
                     raise serializers.ValidationError(errors)
         else:
-            error_mismatch = {'password1': MISMATCH}
+            error_mismatch = {"password1": MISMATCH}
             raise serializers.ValidationError(error_mismatch)
 
         return super(UserSerializer, self).validate(data)
 
     def create(self, validated_data):
-        password = validated_data.pop('password1')
-        user = User(username=validated_data.pop('username'))
+        password = validated_data.pop("password1")
+        user = User(username=validated_data.pop("username"))
         user.is_active = True
         user.is_superuser = False
         user.set_password(password)
@@ -53,8 +51,6 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        ordering = ['created']
-        fields = [
-            'id', 'username'
-        ]
-        extra_kwargs = {'id': {'read_only': True}}
+        ordering = ["created"]
+        fields = ["id", "username"]
+        extra_kwargs = {"id": {"read_only": True}}

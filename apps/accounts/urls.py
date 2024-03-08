@@ -4,10 +4,10 @@ from rest_framework import routers
 
 from accounts import views
 
-app_name = 'accounts'
+app_name = "accounts"
 
 router = routers.DefaultRouter()
 
-router.register('', views.UserViewSet, basename='accounts')
+router.register("", views.UserViewSet, basename="accounts")
 
-urlpatterns = [path('', include(router.urls))]
+urlpatterns = [path("", include(router.urls))]

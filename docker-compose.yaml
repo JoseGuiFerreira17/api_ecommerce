@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  ecommerce_db:
+    container_name: ecommerce_db
+    image: postgres:13.0-alpine
+    volumes:
+      - ecommerce_data:/var/lib/postgresql/data/
+      - ./pg_scripts/load-extensions.sql:/docker-entrypoint-initdb.d/load-extensions.sql
+    env_file:
+      - .db.env
+    ports:
+      - "${DB_CONTAINER_PORT}:${DB_PORT}"
+    restart: always
+    networks:
+      ecommercenetwork:
+        ipv4_address: 10.5.0.2
+    hostname: ecommerce_db
+
+  ecommerce_django:
+    container_name: ecommerce_django
+    build:
+      context: .
+      args:
+        - REQUIREMENTS_PATH=${REQUIREMENTS_PATH}
+    command: ${BACKEND_COMMAND}
+    volumes:
+      - .:/home/app/
+      - ${MEDIA_ROOT}:/home/app/media
+    ports:
+      - "${BACKEND_CONTAINER_PORT}:${BACKEND_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - ecommerce_db
+    restart: always
+    networks:
+      advosoftnetwork:
+        ipv4_address: 10.5.0.3
+    hostname: ecommerce_django
+
+volumes:
+  ecommerce_data:
+
+networks:
+  ecommercenetwork:
+      external: true
+
+# docker network create --gateway 10.5.0.1 --subnet 10.5.0.0/16 ecommercenetwork

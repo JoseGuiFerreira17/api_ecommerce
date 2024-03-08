@@ -6,17 +6,18 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     id = models.UUIDField(
-        verbose_name='ID da categoria', primary_key=True, default=uuid.uuid4,
-        editable=False
+        verbose_name="ID da categoria",
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
     )
-    name = models.CharField('nome', max_length=60)
-    slug = models.SlugField('slug', unique=True)
+    name = models.CharField("nome", max_length=60)
+    slug = models.SlugField("slug", unique=True)
     parent = models.ForeignKey(
-        'self', blank=True, null=True, related_name='children',
-        on_delete=models.CASCADE
+        "self", blank=True, null=True, related_name="children", on_delete=models.CASCADE
     )
-    created = models.DateTimeField('criado em', auto_now_add=True)
-    modified = models.DateTimeField('modificado em', auto_now=True)
+    created = models.DateTimeField("criado em", auto_now_add=True)
+    modified = models.DateTimeField("modificado em", auto_now=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -28,38 +29,45 @@ class Category(models.Model):
         while i is not None:
             full_path.append(i.name)
             i = i.parent
-        return ' -> '.join(full_path[::-1])
+        return " -> ".join(full_path[::-1])
 
     class Meta:
-        ordering = ['created']
-        verbose_name = 'categoria'
-        verbose_name_plural = 'categorias'
+        ordering = ["created"]
+        verbose_name = "categoria"
+        verbose_name_plural = "categorias"
 
 
 def product_image_directory_path(instance, filename):
     name, extension = os.path.splitext(filename)
-    return '{0}/product/{1}{2}'.format(instance.slug, name, extension)
+    return "{0}/product/{1}{2}".format(instance.slug, name, extension)
 
 
 class Product(models.Model):
     id = models.UUIDField(
-        verbose_name='ID do produto', primary_key=True, default=uuid.uuid4,
-        editable=False
+        verbose_name="ID do produto",
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
     )
     category = models.ForeignKey(
-        'product.Category', verbose_name='categoria', on_delete=models.CASCADE,
-        null=True, blank=True
+        "product.Category",
+        verbose_name="categoria",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
-    name = models.CharField('nome', max_length=100)
-    slug = models.SlugField('slug', unique=True, db_index=True)
-    description = models.TextField('descrição', null=True, blank=True)
-    value = models.DecimalField('valor', max_digits=22, decimal_places=2)
+    name = models.CharField("nome", max_length=100)
+    slug = models.SlugField("slug", unique=True, db_index=True)
+    description = models.TextField("descrição", null=True, blank=True)
+    value = models.DecimalField("valor", max_digits=22, decimal_places=2)
     image = models.ImageField(
-        verbose_name='imagem', upload_to=product_image_directory_path,
-        null=True, blank=True
+        verbose_name="imagem",
+        upload_to=product_image_directory_path,
+        null=True,
+        blank=True,
     )
-    created = models.DateTimeField('criado em', auto_now_add=True)
-    modified = models.DateTimeField('modificado em', auto_now=True)
+    created = models.DateTimeField("criado em", auto_now_add=True)
+    modified = models.DateTimeField("modificado em", auto_now=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -69,6 +77,6 @@ class Product(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['created']
-        verbose_name = 'produto'
-        verbose_name_plural = 'produtos'
+        ordering = ["created"]
+        verbose_name = "produto"
+        verbose_name_plural = "produtos"

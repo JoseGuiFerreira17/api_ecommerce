@@ -5,35 +5,35 @@ from product.models import Category, Product
 
 class CategoryModelTest(TestCase):
     def setUp(self):
-        self.category = Category.objects.create(name='Teste Categoria')
+        self.category = Category.objects.create(name="Teste Categoria")
         self.category.save()
 
     def test_create(self):
         self.assertTrue(Category.objects.exists())
 
     def test_str(self):
-        self.assertEquals(str(self.category), 'Teste Categoria')
+        self.assertEquals(str(self.category), "Teste Categoria")
 
     def test_name_can_not_be_blank_and_null(self):
-        field = Category._meta.get_field('name')
+        field = Category._meta.get_field("name")
         self.assertFalse(field.blank)
         self.assertFalse(field.null)
 
     def test_slug_can_not_be_blank_and_null(self):
-        field = Category._meta.get_field('slug')
+        field = Category._meta.get_field("slug")
         self.assertFalse(field.blank)
         self.assertFalse(field.null)
 
     def test_parent_can_be_blank_and_null(self):
-        field = Category._meta.get_field('parent')
+        field = Category._meta.get_field("parent")
         self.assertTrue(field.blank)
         self.assertTrue(field.null)
 
     def test_name_value(self):
-        self.assertEquals(self.category.name, 'Teste Categoria')
+        self.assertEquals(self.category.name, "Teste Categoria")
 
     def test_slug_value(self):
-        self.assertEquals(self.category.slug, 'teste-categoria')
+        self.assertEquals(self.category.slug, "teste-categoria")
 
     def test_parent_value(self):
         self.assertEquals(self.category.parent, None)
@@ -47,23 +47,23 @@ class CategoryModelTest(TestCase):
 
 class SubCategoryModelTest(TestCase):
     def setUp(self):
-        self.category = Category.objects.create(name='Teste Categoria')
+        self.category = Category.objects.create(name="Teste Categoria")
         self.category.save()
         self.subcategory = Category.objects.create(
-            name='Sub teste', parent=self.category
+            name="Sub teste", parent=self.category
         )
 
     def test_create(self):
         self.assertTrue(Category.objects.exists())
 
     def test_str(self):
-        self.assertEquals(str(self.subcategory), 'Teste Categoria -> Sub teste')
+        self.assertEquals(str(self.subcategory), "Teste Categoria -> Sub teste")
 
     def test_name_value(self):
-        self.assertEquals(self.subcategory.name, 'Sub teste')
+        self.assertEquals(self.subcategory.name, "Sub teste")
 
     def test_slug_value(self):
-        self.assertEquals(self.subcategory.slug, 'sub-teste')
+        self.assertEquals(self.subcategory.slug, "sub-teste")
 
     def test_parent_value(self):
         self.assertEquals(self.subcategory.parent, self.category)
@@ -71,11 +71,13 @@ class SubCategoryModelTest(TestCase):
 
 class ProductModelTest(TestCase):
     def setUp(self):
-        self.category = Category.objects.create(name='Teste')
+        self.category = Category.objects.create(name="Teste")
         self.category.save()
         self.product = Product.objects.create(
-            category=self.category, name='Produto Teste',
-            description='Lorem ipsum', value=25.66
+            category=self.category,
+            name="Produto Teste",
+            description="Lorem ipsum",
+            value=25.66,
         )
         self.product.save()
 
@@ -83,35 +85,35 @@ class ProductModelTest(TestCase):
         self.assertTrue(Product.objects.exists())
 
     def test_str(self):
-        self.assertEquals(str(self.product), 'Produto Teste')
+        self.assertEquals(str(self.product), "Produto Teste")
 
     def test_category_can_not_be_blank_and_null(self):
-        field = Product._meta.get_field('category')
+        field = Product._meta.get_field("category")
         self.assertTrue(field.blank)
         self.assertTrue(field.null)
 
     def test_name_can_not_be_blank_and_null(self):
-        field = Product._meta.get_field('name')
+        field = Product._meta.get_field("name")
         self.assertFalse(field.blank)
         self.assertFalse(field.null)
 
     def test_slug_can_not_be_blank_and_null(self):
-        field = Product._meta.get_field('slug')
+        field = Product._meta.get_field("slug")
         self.assertFalse(field.blank)
         self.assertFalse(field.null)
 
     def test_description_can_not_be_blank_and_null(self):
-        field = Product._meta.get_field('description')
+        field = Product._meta.get_field("description")
         self.assertTrue(field.blank)
         self.assertTrue(field.null)
 
     def test_value_can_not_be_blank_and_null(self):
-        field = Product._meta.get_field('value')
+        field = Product._meta.get_field("value")
         self.assertFalse(field.blank)
         self.assertFalse(field.null)
 
     def test_image_can_not_be_blank_and_null(self):
-        field = Product._meta.get_field('image')
+        field = Product._meta.get_field("image")
         self.assertTrue(field.blank)
         self.assertTrue(field.null)
 
@@ -119,13 +121,13 @@ class ProductModelTest(TestCase):
         self.assertEquals(self.product.category, self.category)
 
     def test_name_value(self):
-        self.assertEquals(self.product.name, 'Produto Teste')
+        self.assertEquals(self.product.name, "Produto Teste")
 
     def test_slug_value(self):
-        self.assertEquals(self.product.slug, 'produto-teste')
+        self.assertEquals(self.product.slug, "produto-teste")
 
     def test_description_value(self):
-        self.assertEquals(self.product.description, 'Lorem ipsum')
+        self.assertEquals(self.product.description, "Lorem ipsum")
 
     def test_value_value(self):
         self.assertEquals(self.product.value, 25.66)
