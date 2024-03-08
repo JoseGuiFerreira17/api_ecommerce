@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import product.models
+import apps.product.models
 import uuid
 
 
@@ -89,7 +89,7 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         null=True,
-                        upload_to=product.models.product_image_directory_path,
+                        upload_to=apps.product.models.product_image_directory_path,
                         verbose_name="imagem",
                     ),
                 ),

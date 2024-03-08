@@ -3,10 +3,10 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from accounts.models import User
-from product.models import Category, Product
-from product.serializers import CategorySerializer, ProductSerializer
-from product.views import CategoryViewSet, ProductViewSet
+from apps.accounts.models import User
+from apps.product.models import Category, Product
+from apps.product.serializers import CategorySerializer, ProductSerializer
+from apps.product.views import CategoryViewSet, ProductViewSet
 
 factory = APIRequestFactory()
 

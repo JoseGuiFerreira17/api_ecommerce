@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from product import views
+from apps.product import views
 
 app_name = "product"
 

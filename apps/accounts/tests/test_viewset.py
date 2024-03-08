@@ -3,9 +3,9 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from accounts.models import User
-from accounts.serializers import UpdateUserSerializer, UserSerializer, MISMATCH
-from accounts.views import UserViewSet
+from apps.accounts.models import User
+from apps.accounts.serializers import UpdateUserSerializer, UserSerializer, MISMATCH
+from apps.accounts.views import UserViewSet
 
 factory = APIRequestFactory()
 

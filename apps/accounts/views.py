@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 
-from accounts.models import User
-from accounts.permissions import IsAuthenticatedOrWriteOnly
-from accounts.serializers import UserSerializer, UpdateUserSerializer
+from apps.accounts.models import User
+from apps.accounts.permissions import IsAuthenticatedOrWriteOnly
+from apps.accounts.serializers import UserSerializer, UpdateUserSerializer
 
 
 class UserViewSet(ModelViewSet):

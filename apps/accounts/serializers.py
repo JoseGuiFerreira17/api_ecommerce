@@ -3,7 +3,7 @@ from django.core import exceptions
 
 from rest_framework import serializers
 
-from accounts.models import User
+from apps.accounts.models import User
 
 MISMATCH = "As senhas não correspondem"
 

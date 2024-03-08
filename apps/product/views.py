@@ -4,9 +4,9 @@ from rest_framework import parsers
 from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
 
-from product.models import Category, Product
-from product.permissions import IsAdminOrReadOnly
-from product.serializers import CategorySerializer, ProductSerializer
+from apps.product.models import Category, Product
+from apps.product.permissions import IsAdminOrReadOnly
+from apps.product.serializers import CategorySerializer, ProductSerializer
 
 
 class CategoryViewSet(ModelViewSet):

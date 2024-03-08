@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.test import TestCase
-from product.models import Category, Product
+from apps.product.models import Category, Product
 
 
 class CategoryModelTest(TestCase):

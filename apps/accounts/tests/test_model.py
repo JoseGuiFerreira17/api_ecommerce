@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.test import TestCase
-from accounts.models import User
+from apps.accounts.models import User
 
 
 class UserModelTest(TestCase):
