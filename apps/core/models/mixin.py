@@ -1,5 +1,5 @@
 import uuid
-from django.db.models import Model, UUIDField, DateTimeField, PROTECT, ForeignKey
+from django.db.models import Model, UUIDField, DateTimeField
 
 
 class BaseModelMixin(Model):

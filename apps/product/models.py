@@ -1,5 +1,4 @@
 import os
-import uuid
 from django.db import models
 from django.utils.text import slugify
 from apps.core.models import BaseModelMixin

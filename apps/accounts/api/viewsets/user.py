@@ -10,7 +10,7 @@ class UserViewSet(BaseModelViewSet):
     model = User
     serializer_class = UserSerializer
     action_serializer_classes = {
-        'update': UserUpdatePasswordSerializer,
+        "update": UserUpdatePasswordSerializer,
     }
 
     @action(detail=False, methods=["get", "put"])

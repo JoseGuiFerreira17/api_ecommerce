@@ -7,7 +7,7 @@ from rest_framework.mixins import (
     RetrieveModelMixin,
     UpdateModelMixin,
 )
-from rest_framework.parsers import MultiPartParser, JSONParser
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
@@ -39,6 +39,11 @@ class BaseReadOnlyModelViewSet(BaseGenericViewSet, RetrieveModelMixin, ListModel
 
 
 class BaseModelViewSet(
-    BaseGenericViewSet, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin
+    BaseGenericViewSet,
+    CreateModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    DestroyModelMixin,
+    ListModelMixin,
 ):
     pass

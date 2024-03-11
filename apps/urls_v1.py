@@ -2,9 +2,9 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    #DOCS
+    # DOCS
     path("", include("apps.doc_urls")),
-    #API
+    # API
     path("", include("apps.product.urls")),
     path("", include("apps.accounts.api.routers")),
 ]
