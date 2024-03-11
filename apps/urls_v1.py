@@ -6,5 +6,5 @@ urlpatterns = [
     path("", include("apps.doc_urls")),
     #API
     path("", include("apps.product.urls")),
-    path("", include("apps.accounts.urls")),
+    path("", include("apps.accounts.api.routers")),
 ]

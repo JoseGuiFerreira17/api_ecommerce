@@ -27,6 +27,7 @@ THIRD_PART_APPS = [
 ]
 
 LOCAL_APPS = [
+    "apps.core",
     "apps.accounts",
     "apps.product",
 ]
@@ -40,6 +41,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }
@@ -57,7 +59,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_TRUSTED_ORIGINS = environ.get("CSRF_TRUSTED_ORIGINS", default="").split(",")
+#CSRF_TRUSTED_ORIGINS = environ.get("CSRF_TRUSTED_ORIGINS", default="").split(",")
 
 ROOT_URLCONF = "ecommerce.urls"
 

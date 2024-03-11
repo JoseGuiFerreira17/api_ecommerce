@@ -6,7 +6,6 @@ services:
     image: postgres:13.0-alpine
     volumes:
       - ecommerce_data:/var/lib/postgresql/data/
-      - ./pg_scripts/load-extensions.sql:/docker-entrypoint-initdb.d/load-extensions.sql
     env_file:
       - .db.env
     ports:

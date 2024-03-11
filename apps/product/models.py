@@ -2,22 +2,15 @@ import os
 import uuid
 from django.db import models
 from django.utils.text import slugify
+from apps.core.models import BaseModelMixin
 
 
-class Category(models.Model):
-    id = models.UUIDField(
-        verbose_name="ID da categoria",
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
+class Category(BaseModelMixin):
     name = models.CharField("nome", max_length=60)
     slug = models.SlugField("slug", unique=True)
     parent = models.ForeignKey(
         "self", blank=True, null=True, related_name="children", on_delete=models.CASCADE
     )
-    created = models.DateTimeField("criado em", auto_now_add=True)
-    modified = models.DateTimeField("modificado em", auto_now=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -32,7 +25,6 @@ class Category(models.Model):
         return " -> ".join(full_path[::-1])
 
     class Meta:
-        ordering = ["created"]
         verbose_name = "categoria"
         verbose_name_plural = "categorias"
 
@@ -42,13 +34,7 @@ def product_image_directory_path(instance, filename):
     return "{0}/product/{1}{2}".format(instance.slug, name, extension)
 
 
-class Product(models.Model):
-    id = models.UUIDField(
-        verbose_name="ID do produto",
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
+class Product(BaseModelMixin):
     category = models.ForeignKey(
         "product.Category",
         verbose_name="categoria",
@@ -66,8 +52,6 @@ class Product(models.Model):
         null=True,
         blank=True,
     )
-    created = models.DateTimeField("criado em", auto_now_add=True)
-    modified = models.DateTimeField("modificado em", auto_now=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -77,6 +61,5 @@ class Product(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["created"]
         verbose_name = "produto"
         verbose_name_plural = "produtos"

@@ -1,21 +1,20 @@
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import Group
+# from django.contrib import admin
+# from django.contrib.auth.admin import UserAdmin
+# from django.contrib.auth.models import Group
 
-from apps.accounts.models import User
-
-
-@admin.register(User)
-class UserAdmin(UserAdmin):
-    list_display = ["username", "is_active", "is_staff", "is_superuser"]
-    list_filter = ["is_active", "is_staff", "is_superuser"]
-    search_fields = ["username"]
-    filter_horizontal = ["user_permissions"]
-
-    fieldsets = [["Informações pessoais", {"fields": ["username"]}]]
-    add_fieldsets = [
-        ["Informações pessoais", {"fields": ["username", "password1", "password2"]}]
-    ]
+# from apps.accounts.models import User
 
 
-admin.site.unregister(Group)
+# @admin.register(User)
+# class UserAdmin(UserAdmin):
+#     list_display = ["name", "email", "phone" "is_active", "is_staff"]
+#     list_filter = ["is_active", "is_staff"]
+#     search_fields = ["name", "email"]
+
+#     fieldsets = [["Informações pessoais", {"fields": ["name", "phone", "email"]}]]
+#     add_fieldsets = [
+#         ["Informações pessoais", {"fields": ["password1", "password2"]}]
+#     ]
+
+
+# admin.site.unregister(Group)
