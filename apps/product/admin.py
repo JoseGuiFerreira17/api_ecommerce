@@ -1,17 +1,16 @@
 from django.contrib import admin
-from product.models import Category, Product
+from apps.product.models import Category, Product
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'parent']
-    fieldsets = [['', {'fields': ['name', 'parent']}]]
+    list_display = ["name", "slug", "parent"]
+    fieldsets = [["", {"fields": ["name", "parent"]}]]
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'category', 'value']
-    fieldsets = [['', {'fields': [
-        'name', 'category', 'description', 'value', 'image'
-        ]}]
+    list_display = ["name", "slug", "category", "value"]
+    fieldsets = [
+        ["", {"fields": ["name", "category", "description", "value", "image"]}]
     ]
