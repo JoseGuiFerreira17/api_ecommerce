@@ -56,6 +56,11 @@ class BaseReadOnlyModelViewSet(BaseGenericViewSet, RetrieveModelMixin, ListModel
 
 
 class BaseModelViewSet(
-    BaseGenericViewSet, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin
+    BaseGenericViewSet,
+    CreateModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    DestroyModelMixin,
+    ListModelMixin,
 ):
     pass
