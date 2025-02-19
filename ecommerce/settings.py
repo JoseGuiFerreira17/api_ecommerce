@@ -34,18 +34,6 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PART_APPS + LOCAL_APPS
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
-    ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
-    ],
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
-}
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -81,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ecommerce.wsgi.application"
 
-
 DATABASES = {
     "default": {
         "ENGINE": environ.get("DB_ENGINE", default="django.db.backends.postgresql"),
@@ -94,7 +81,6 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = "accounts.User"
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -124,11 +110,23 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media/"
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "E-Commerce API",
     "DESCRIPTION": "Documentação da API de E-Commerce",
     "VERSION": "0.0.1",
     "SERVE_INCLUDE_SCHEMA": False,
 }
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
