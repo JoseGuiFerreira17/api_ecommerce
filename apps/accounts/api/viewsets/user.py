@@ -1,16 +1,32 @@
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from apps.accounts.api.serializers import UserUpdatePasswordSerializer, UserSerializer
+from apps.accounts.api.filtersets import UserFilterSet
+from apps.accounts.api.serializers import (
+    UserUpdatePasswordSerializer,
+    UserCreateSerializer,
+    UserDetailSerializer,
+    UserReadSerializer,
+)
 from apps.accounts.models import User
 from apps.core.api.viewsets import BaseModelViewSet
 
 
 class UserViewSet(BaseModelViewSet):
     model = User
-    serializer_class = UserSerializer
+    serializer_class = UserReadSerializer
+    filterset_class = UserFilterSet
+    search_fields = ["name", "email"]
     action_serializer_classes = {
-        "update": UserUpdatePasswordSerializer,
+        "me": UserDetailSerializer,
+        "retrieve": UserDetailSerializer,
+        "create": UserCreateSerializer,
+        "update": UserDetailSerializer,
+        "password": UserUpdatePasswordSerializer,
+    }
+    action_permission_classes = {
+        "create": [AllowAny],
     }
 
     @action(detail=False, methods=["get", "put"])
