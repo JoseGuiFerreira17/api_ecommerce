@@ -6,7 +6,7 @@ from apps.core.models import BaseModelMixin
 
 def product_image_directory_path(instance, filename):
     name, extension = os.path.splitext(filename)
-    return "{0}/product/{1}{2}".format(instance.slug, name, extension)
+    return "products/{0}/{1}{2}".format(instance.slug, name, extension)
 
 
 class Product(BaseModelMixin):
@@ -20,7 +20,7 @@ class Product(BaseModelMixin):
     name = models.CharField("nome", max_length=100)
     slug = models.SlugField("slug", unique=True, db_index=True)
     description = models.TextField("descrição", null=True, blank=True)
-    value = models.DecimalField("valor", max_digits=22, decimal_places=2)
+    value = models.DecimalField("valor", max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField("quantidade em estoque", default=0)
     image = models.ImageField(
         verbose_name="imagem",
@@ -30,7 +30,14 @@ class Product(BaseModelMixin):
     )
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            num = 1
+        while Product.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{num}"
+            num += 1
+        self.slug = slug
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):

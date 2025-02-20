@@ -11,8 +11,14 @@ class Category(BaseModelMixin):
     )
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+        if not self.slug:
+            base_slug = slugify(self.name)
+            num = 1
+            while Category.objects.filter(slug=base_slug).exists():
+                base_slug = f"{slugify(self.name)}-{num}"
+                num += 1
+            self.slug = base_slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         full_path = [self.name]
