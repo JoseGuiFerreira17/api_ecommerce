@@ -21,7 +21,7 @@ class User(AbstractUser, PermissionsMixin, BaseModelMixin):
     name = CharField("nome de usuário", max_length=255)
     birth_date = DateField("data de nascimento", blank=True, null=True)
     gender = CharField(
-        "gênero", max_length=1, choices=GenderChoices, blank=True, null=True
+        "gênero", max_length=1, choices=GenderChoices.choices, blank=True, null=True
     )
     profile_picture = FileField(
         "foto de perfil", upload_to=upload_to, blank=True, null=True
