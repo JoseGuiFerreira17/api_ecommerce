@@ -1,14 +1,13 @@
-from rest_framework import serializers
-from apps.core.api.serializers import DEFAULT_BASE_FIELDS
+from rest_framework.serializers import ModelSerializer
 from apps.product.models import Category
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(ModelSerializer):
 
     class Meta:
         model = Category
         ordering = ["created"]
-        fields = [*DEFAULT_BASE_FIELDS, "name", "slug", "parent"]
+        fields = "__all__"
         extra_kwargs = {
             "id": {"read_only": True},
             "slug": {"read_only": True},

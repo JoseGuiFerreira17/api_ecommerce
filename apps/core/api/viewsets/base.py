@@ -12,7 +12,6 @@ from rest_framework.viewsets import GenericViewSet
 
 
 class BaseGenericViewSet(GenericViewSet):
-    has_file_field = False
     parser_classes = [JSONParser]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     model = None
@@ -25,6 +24,7 @@ class BaseGenericViewSet(GenericViewSet):
         # 'partial_update': None,
         # 'destroy': None,
     }
+    queryset = None
     filterset_class = None
 
     def get_queryset(self):
@@ -36,11 +36,6 @@ class BaseGenericViewSet(GenericViewSet):
         if self.action in self.action_serializer_classes:
             return self.action_serializer_classes[self.action]
         return self.serializer_class
-
-    def get_parsers(self):
-        if self.has_file_field:
-            self.parser_classes = [MultiPartParser, *self.parser_classes]
-        return super().get_parsers()
 
     @property
     def search_fields(self):
