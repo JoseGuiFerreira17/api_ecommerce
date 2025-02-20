@@ -18,4 +18,4 @@ class Order(BaseModelMixin):
         verbose_name_plural = "pedidos"
 
     def __str__(self):
-        return f"{self.user} - {self.status} - {self.total}"
+        return f"Pedido {self.id} de {self.user}"

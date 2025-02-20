@@ -12,4 +12,4 @@ class CartItem(BaseModelMixin):
         verbose_name_plural = "itens do carrinho"
 
     def __str__(self):
-        return f"{self.user} - {self.product} - {self.quantity}"
+        return f"{self.cart.user} - {self.product} - {self.quantity}"

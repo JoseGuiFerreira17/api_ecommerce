@@ -10,4 +10,4 @@ class Cart(BaseModelMixin):
         verbose_name_plural = "carrinhos"
 
     def __str__(self):
-        return f"{self.user}"
+        return f"Carrinho de {self.user}"
