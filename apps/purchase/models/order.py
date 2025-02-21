@@ -1,10 +1,18 @@
-from django.db.models import ForeignKey, CASCADE, CharField, DecimalField
+from django.db.models import ForeignKey, CASCADE, CharField, DecimalField, OneToOneField
 from apps.core.models import BaseModelMixin
 from apps.purchase.choices import StatusChoices
 
 
 class Order(BaseModelMixin):
-    user = ForeignKey("accounts.User", verbose_name="usuário", on_delete=CASCADE)
+    user = ForeignKey(
+        "accounts.User",
+        verbose_name="usuário",
+        related_name="orders",
+        on_delete=CASCADE,
+    )
+    cart = OneToOneField(
+        "Cart", verbose_name="carrinho", related_name="orders", on_delete=CASCADE
+    )
     status = CharField(
         "status",
         max_length=25,
@@ -18,4 +26,4 @@ class Order(BaseModelMixin):
         verbose_name_plural = "pedidos"
 
     def __str__(self):
-        return f"{self.user} - {self.status} - {self.total}"
+        return f"Pedido {self.id} de {self.user}"

@@ -24,4 +24,4 @@ class Payment(BaseModelMixin):
         verbose_name_plural = "pagamentos"
 
     def __str__(self):
-        return f"{self.order} - {self.payment_method}"
+        return f"Pagamento do pedido {self.order}"

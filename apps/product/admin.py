@@ -12,5 +12,5 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["name", "slug", "category", "value"]
     fieldsets = [
-        ["", {"fields": ["name", "category", "description", "value", "image"]}]
+        ["", {"fields": ["name", "category", "description", "value", "stock", "image"]}]
     ]
